@@ -3,66 +3,183 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Lato', sans-serif;
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZvz6BSH4PBkflHJanSSNA7MCcZzgQRFdYistiMEryRGEs4HHyzM7WABU&s=10');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  color: #f3f4f6; /* Light font color for dark theme */
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
 
-/* Custom scrollbar styles (improved) */
+/* Full transparency for all containers */
+.container,
+.chat-window,
+.chat-sidebar,
+.chat-content,
+.chat-header,
+.chat-messages,
+.chat-input {
+  background-color: transparent !important;
+  color: #f3f4f6; /* Light text color */
+}
+
+/* Custom scrollbar styles */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Light gray for a subtle background */
+  background: rgba(243, 244, 246, 0.1); /* Transparent track */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #6b7280; /* Soft gray for the scrollbar thumb */
+  background: rgba(255, 255, 255, 0.3); /* Lighter gray thumb */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #4b5563; /* Darker gray on hover */
+  background: rgba(255, 255, 255, 0.5); /* Lighter gray on hover */
 }
 
-/* Dark mode styles (refined) */
+/* Dark mode styles */
 .dark {
-  background-color: #1f2937; /* Darker gray for a modern look */
-  color: #f3f4f6; /* Slightly off-white for better contrast */
+  background-color: #1f2937;
+  color: #f3f4f6;
 }
 
 .dark ::-webkit-scrollbar-track {
-  background: #2d3748; /* Darker gray for the track */
+  background: rgba(45, 55, 72, 0.1);
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: #6b7280; /* Soft gray for the thumb, consistent with light mode */
+  background: rgba(107, 114, 128, 0.5);
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #4b5563; /* Darker gray on hover */
+  background: rgba(75, 85, 99, 0.5);
 }
 
-/* Additional Styling (Optional) */
-.container {
-  max-width: 1200px; /* Limit container width for better readability */
-  margin: 0 auto; /* Center the content horizontally */
-  padding: 2rem;
+/* Chat sidebar */
+.chat-sidebar .contact {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  background-color: transparent;
+  color: #f3f4f6;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600; /* Give headings a bolder look */
+.chat-sidebar .contact:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
 }
 
-p {
-  line-height: 1.6; /* Improve readability with slightly more spacing */
+.chat-sidebar .contact.active {
+  background-color: rgba(59, 130, 246, 0.7);
+  color: white;
 }
 
-a {
-  color: #3b82f6; /* A nice blue for links */
-  text-decoration: none; /* Remove default underline */
-  transition: color 0.2s ease; /* Smooth transition on hover */
+/* Chat content and messages */
+.chat-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
 }
 
-a:hover {
-  color: #2563eb; /* Darker blue on hover */
+.chat-header {
+  padding: 1rem;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.chat-message {
+  margin-bottom: 1rem;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.chat-message.sent {
+  align-self: flex-end;
+  background-color: rgba(59, 130, 246, 0.8); /* Telegram-like blue for sent messages */
+  color: white;
+  border-radius: 12px 12px 0 12px;
+  padding: 0.75rem 1rem;
+}
+
+.chat-message.received {
+  align-self: flex-start;
+  background-color: rgba(255, 255, 255, 0.1); /* Light gray for received messages */
+  color: #f3f4f6;
+  border-radius: 12px 12px 12px 0;
+  padding: 0.75rem 1rem;
+}
+
+/* Chat input */
+.chat-input {
+  display: flex;
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chat-input textarea {
+  flex: 1;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent input */
+  color: #f3f4f6;
+  resize: none;
+}
+
+.chat-input button {
+  margin-left: 0.5rem;
+  background-color: rgba(59, 130, 246, 0.8); /* Button with Telegram-like blue */
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.chat-input button:hover {
+  background-color: rgba(37, 99, 235, 0.9); /* Darker blue on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .chat-sidebar {
+    width: 100%;
+    height: auto;
+  }
+  .chat-content {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .chat-sidebar {
+    width: 30%;
+  }
+}
+
+/* Customizing input, buttons, and hover states */
+input:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+  box-shadow: none;
 }
